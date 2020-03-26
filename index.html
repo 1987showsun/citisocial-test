@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Citisocial Test</title>
+    </head>
+    <body>
+        <input id="val" type="text" name="val" value=""></input>
+        <button onclick="operation()">submit</button>
+        <div id="ans"></div>
+    </body>
+
+    <script type="text/javascript">
+        const calculated = {
+            doubleVal : ({ array, total }) => {
+              const checkＭatch = array.some((item,i,arr) => {
+                if( i < total-1 ){
+                  return item*2 != arr[i+1];
+                }
+              });
+              const nextVal = Number(array[total-1])*2;
+              return {
+                status : checkＭatch? false:true,
+                status_text: '2的倍數遞增',
+                nextVal
+              };
+            },
+            
+            additionVal : ({ array, total }) => {
+              const checkＭatch = array.some((item,i,arr) => {
+                if( i < total-1 ){
+                  return Number(item)+10!=Number(arr[i+1]);
+                }
+              });
+          
+              const nextVal = Number(array[total-1])+10;
+              return {
+                status : checkＭatch? false:true,
+                status_text: '加10遞增',
+                nextVal
+              };
+            },
+            
+            multiplyingAdditionVal : ({ array, total }) => {
+              const checkＭatch = array.some((item,i,arr) => {
+                if( i < total-1 ){
+                  return (Number(item)*2)+6!=Number(arr[i+1]);
+                }
+              });
+              const nextVal = (Number(array[total-1])*2)+6;
+              return {
+                status : checkＭatch? false:true,
+                status_text: '2的倍數加6遞增',
+                nextVal
+              };
+            }
+          }
+          
+          const operation = e => {
+            let   ansText = '';
+            const ans = document.getElementById('ans');
+            const stringToArray = document.getElementById('val').value.split(' ');
+            const setting = {
+                array : stringToArray,
+                total : stringToArray.length
+            }
+            
+            Object.keys( calculated ).map((item,i) => {
+                if( calculated[item](setting)['status'] ){
+                    console.log( `${calculated[item](setting)['status_text']}：下一個數值為：${calculated[item](setting)['nextVal']}` );
+                    return `${calculated[item](setting)['status_text']}；下一個數值為：${calculated[item](setting)['nextVal']}`;
+                }else{
+                    console.log(`${calculated[item](setting)['status_text']}：你所輸入的值無法匹配`);
+                    return `${calculated[item](setting)['status_text']}：你所輸入的值無法匹配`;
+                }
+            }).forEach( item => {
+                ansText = ansText + `<p>${item}</p>`
+            })
+
+            ans.innerHTML = ansText;
+        }
+    </script>
+</html>
