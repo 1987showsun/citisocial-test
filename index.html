@@ -2,11 +2,116 @@
     <head>
         <meta charset="utf-8">
         <title>Citisocial Test</title>
+        <style>
+          *{
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+          }
+          input, button{
+            width: 100%;
+            height: 35px;
+            padding: 0px 10px;
+            appearance: none;
+            border: 1px solid #ccc;
+            outline: none;
+          }
+          #root{
+            width              : 100%;
+            padding            : 20px 10px;
+            display            : flex;
+            align-items        : flex-start;
+          }
+          .block-row{
+            width              : 100%;
+            display            : flex;
+            max-width          : 420px; 
+          }
+          .block-col{
+            width              : 100%;
+            display            : inline-flex;
+          }
+          .block-col.left{
+            flex-direction     : column;
+            padding-right      : 20px;
+            text-align         : justify;
+          }
+          .block-col.left  h2{
+            margin-bottom      : 10px;
+          }
+          .block-col.left  p{
+            margin-bottom      : 10px;
+            line-height        : 1.4rem;
+          }
+          .block-col.right{
+            max-width          : 600px;
+            flex-direction     : column;
+            position: sticky;
+            top: 0px;
+          }
+          .submit{
+            max-width          : 100px;
+            background         : #333;
+            color              : #fff;
+            border-color       : #333;
+          }
+          .ans-block{
+            flex-direction     : column;
+            margin-top         : 15px;
+          }
+          .ans-block h3{
+            font-size          : 1rem;
+            margin-bottom      : 10px;
+          }
+          #ans p{
+            font-size          : 0.9rem;
+            margin-bottom      : 10px;
+          }
+          #ans p:last-child{
+            margin-bottom      : 0px;
+          }
+        </style>
     </head>
     <body>
-        <input id="val" type="text" name="val" value=""></input>
-        <button onclick="operation()">submit</button>
-        <div id="ans"></div>
+        <div id="root">
+          <div class="block-col left">
+            <h2>Instructions:</h2>
+            <p>The following questions will give us a better sense of how you think and solve problems.</p>
+            <p>You should spend no more than ​three hours ​on this exercise. At the end of your three-hour slot, please send this exercise back to your interviewer. This exercise is designed to be quite difficult to finish within three hours, please try to do as much as you can! Good Luck!</p>
+            <h2>Exercise</h2>
+            <p>Suppose you get a short input of increasing integers, say, "2 4", can you figure out what integers come after 4? If you assume the second integer is +2 greater than the first, then the next integer should be 6; but if you assume the second integer is double the first integer, then perhaps the next integer is 8. However, if the short input was "2 4 8", then you can almost be sure that the next integer is 16.</p>
+            <p>In short, the more numbers you get, the more hypotheses you can eliminate. We would like you to write a program, in ​Python, Javascript, Java or C#​. Please clearly indicate which one you would like to use. The program takes in a short list of increasing integers as inputs, hypothesize possible patterns in the integers, and generate the next 10 integers in line.</p>
+            <p>For instance, if the program receives the following input: <br/>4 14</p>
+            <p>the program may assume that the next integer is the previous integer plus 10, thus it will generate:<br/> 24 34 44 54 64 74 84 94 104 114</p>
+            <p>but if the program receives the following input instead: <br/>4 14 34</p>
+            <p>then it may hypothesize that the next integer is the previous multiplied by 2 plus 6:<br/>74 154 314 634 1274 2554 5114 10234 20474 40954</p>
+            <p>This is an ​open-ended​ problem that we're presenting, in other words, ​the input list of integers may have very interesting properties (e.g. a fibonacci sequence),​ there is no particular set of integer sequences that we are testing. So, be creative! try to identify as many sequences as you can think of.</p>
+            <p>You have ​three hours​ to work on this problem. When time is up, please zip and e-mail your source code to your interviewer</p>
+            <h2>Specifications and Rubric</h2>
+            <p>You have to use one of the following:Python, Javascript, Java or C#The program should be compiled and run by simple commands like (for java):</p>
+            <p>javac MySolution.java<br/>java MySolution 1 2 4 8</p>
+            <p>and require no additional configurations.</p>
+            <p>After your program is launched, it should ask for user input from keyboard in the form of integers separated by spaces. (e.g. 2 4 6)</p>
+            <p>You will be evaluated on:</p>
+            <ul>
+              <li>Correctness</li>
+              <li>Robustness</li>
+              <li>Algorithmic design</li>
+              <li>Coding style and organization</li>
+            </ul>
+            <p>That's it, good luck!</p>
+          </div>
+          <div class="block-col right">
+            <div class="block-row form-block">
+              <input id="val" type="text" name="val" value="" placeholder="請輸入數字，數組間請使用空白隔開" />
+              <button class="submit" onclick="operation()">開始計算</button>
+            </div>
+            <div class="block-row ans-block">
+              <h3>顯示結果：</h3>
+              <div id="ans"></div>
+            </div>
+          </div>
+        </div>
     </body>
 
     <script type="text/javascript">
