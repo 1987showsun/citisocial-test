@@ -25,7 +25,6 @@
           .block-row{
             width              : 100%;
             display            : flex;
-            max-width          : 420px; 
           }
           .block-col{
             width              : 100%;
@@ -119,16 +118,32 @@
             doubleVal : ({ array, total }) => {
               const checkＭatch = array.some((item,i,arr) => {
                 if( i < total-1 ){
-                  return item*2 != arr[i+1];
+                  console.log( Number(item)+2 ,arr[i+1] );
+                  return Number(item)+2 != arr[i+1];
+                }
+              });
+              const nextVal = Number(array[total-1])+2;
+              return {
+                status : checkＭatch? false:true,
+                status_text: 'Previous integer plus 2 increasing',
+                nextVal
+              };
+            },
+
+            multiple : ({ array, total }) => {
+              const checkＭatch = array.some((item,i,arr) => {
+                if( i < total-1 ){
+                  return Number(item)*2 != arr[i+1];
                 }
               });
               const nextVal = Number(array[total-1])*2;
               return {
                 status : checkＭatch? false:true,
-                status_text: '2的倍數遞增',
+                status_text: 'Previous integer double increasing',
                 nextVal
               };
             },
+            
             
             additionVal : ({ array, total }) => {
               const checkＭatch = array.some((item,i,arr) => {
@@ -140,7 +155,7 @@
               const nextVal = Number(array[total-1])+10;
               return {
                 status : checkＭatch? false:true,
-                status_text: '加10遞增',
+                status_text: 'Previous integer plus 10 increasing',
                 nextVal
               };
             },
@@ -154,7 +169,7 @@
               const nextVal = (Number(array[total-1])*2)+6;
               return {
                 status : checkＭatch? false:true,
-                status_text: '2的倍數加6遞增',
+                status_text: 'Previous multiplied by 2 plus 6 increasing',
                 nextVal
               };
             }
@@ -171,11 +186,11 @@
             
             Object.keys( calculated ).map((item,i) => {
                 if( calculated[item](setting)['status'] ){
-                    console.log( `${calculated[item](setting)['status_text']}：下一個數值為：${calculated[item](setting)['nextVal']}` );
-                    return `${calculated[item](setting)['status_text']}；下一個數值為：${calculated[item](setting)['nextVal']}`;
+                    console.log( `${calculated[item](setting)['status_text']}：Next value：${calculated[item](setting)['nextVal']}` );
+                    return `${calculated[item](setting)['status_text']}；Next value：${calculated[item](setting)['nextVal']}`;
                 }else{
-                    console.log(`${calculated[item](setting)['status_text']}：你所輸入的值無法匹配`);
-                    return `${calculated[item](setting)['status_text']}：你所輸入的值無法匹配`;
+                    console.log(`${calculated[item](setting)['status_text']} did not match；Next value：${calculated[item](setting)['nextVal']}`);
+                    return `${calculated[item](setting)['status_text']} did not match；Next value：${calculated[item](setting)['nextVal']}`;
                 }
             }).forEach( item => {
                 ansText = ansText + `<p>${item}</p>`
